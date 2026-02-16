@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <form id="search-form" class="search" autocomplete="off">
+      <input id="city-input" type="text" placeholder="Search city..." aria-label="City name" required />
+      <button type="submit">Search</button>
+    </form>
+
+    <div id="loading" class="status hidden">Loading weather data...</div>
+    <div id="error" class="status error hidden" role="alert"></div>
+
+    <section class="current">
+      <p class="location-label">My Location</p>
+      <h1 id="city-name">-</h1>
+      <p id="current-temp" class="temp">--<span class="degree">°</span></p>
+      <p id="current-condition" class="condition">-</p>
+      <div class="high-low">
+        <span id="temp-high">H: 24°</span>
+        <span class="separator"></span> <span id="temp-low">L: 18°</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <p id="hourly-message" class="card-message">Partly cloudy conditions expected around 6PM.</p>
+      <div id="hourly-list" class="hourly-list" aria-label="Hourly temperatures"></div>
+    </section>
+
+    <section class="card">
+      <div id="daily-list" class="daily-list" aria-label="7-day forecast"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

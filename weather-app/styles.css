@@ -1,0 +1,235 @@
+﻿:root {
+  --bg-start: #1f5fae;
+  --bg-end: #6db4ff;
+  --text: #f5fbff;
+  --muted: rgba(245, 251, 255, 0.85);
+  --card-bg: rgba(255, 255, 255, 0.14);
+  --card-border: rgba(255, 255, 255, 0.24);
+  --track: rgba(255, 255, 255, 0.2);
+  --range: #ffe27a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text);
+  background: linear-gradient(170deg, var(--bg-start), var(--bg-end));
+  display: flex;
+  justify-content: center;
+  padding: 24px 14px 30px;
+  transition: background 400ms ease;
+}
+
+body.night {
+  --bg-start: #071a3d;
+  --bg-end: #15356f;
+  --card-bg: rgba(18, 32, 68, 0.34);
+  --card-border: rgba(170, 204, 255, 0.2);
+}
+
+.app {
+  width: min(720px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search {
+  display: flex;
+  gap: 10px;
+}
+
+.search input,
+.search button {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.search input {
+  flex: 1;
+}
+
+.search input::placeholder {
+  color: rgba(245, 251, 255, 0.68);
+}
+
+.search button {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  padding: 10px 0 6px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 420px;
+}
+
+.current > * {
+  margin: 0;
+}
+
+.location-label {
+  font-size: 0.95rem;
+  line-height: 1.2;
+  color: var(--muted);
+}
+
+.current h1 {
+  font-size: clamp(1.7rem, 2.8vw, 2.2rem);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.temp {
+  display: inline-flex;
+  align-items: baseline; 
+  justify-content: center;
+  font-size: clamp(4rem, 10vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  font-weight: 300;
+  margin-left: 0.3em; 
+}
+
+.degree {
+  font-size: 0.6em;
+  transform: translateY(-0.2em);
+}
+
+.condition {
+  font-size: 1.0rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--muted);
+  margin-top: 4px;
+  margin-right: 4px;
+}
+
+.high-low {
+  display: flex; /* Para alinhar um ao lado do outro */
+  justify-content: center; /* Centraliza no container pai */
+  gap: 6px; /* O segredo! Dá um respiro generoso entre o H e o L */
+  font-size: 1rem;
+  font-weight: 500; /* Um pouco mais gordinho que o normal para leitura fácil */
+  color: var(--muted);
+  font-variant-numeric: tabular-nums; 
+  margin-left: 3px;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 16px;
+  backdrop-filter: blur(12px);
+}
+
+.card-message {
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+
+.hourly-list {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.hourly-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.hourly-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.hour-item {
+  min-width: 68px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.hour-item p {
+  margin: 4px 0;
+}
+
+.daily-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+
+.day-row {
+  display: grid;
+  grid-template-columns: 72px 32px 48px 1fr 48px;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.range-track {
+  position: relative;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--track);
+  overflow: hidden;
+}
+
+.range-bar {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--range);
+}
+
+.status {
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.93rem;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.status.error {
+  background: rgba(255, 90, 90, 0.2);
+  border-color: rgba(255, 90, 90, 0.4);
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 520px) {
+  .day-row {
+    grid-template-columns: 56px 26px 40px 1fr 40px;
+    font-size: 0.88rem;
+  }
+
+  .card {
+    padding: 14px;
+    border-radius: 20px;
+  }
+}
