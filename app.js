@@ -182,21 +182,31 @@ function renderHourly(forecast) {
   const temps = forecast.hourly.temperature_2m;
   const codes = forecast.hourly.weathercode;
   const isDay = forecast.hourly.is_day;
+  const nowInfo = getWeatherInfo(
+    forecast.current_weather.weathercode,
+    forecast.current_weather.is_day === 1
+  );
 
-  const startIndex = times.findIndex((t) => new Date(t) >= now);
+  const nowItem = document.createElement("div");
+  nowItem.className = "hour-item";
+  nowItem.innerHTML = `
+    <p>Now</p>
+    <p>${nowInfo.icon}</p>
+    <p>${Math.round(forecast.current_weather.temperature)}°</p>
+  `;
+  hourlyListEl.appendChild(nowItem);
+
+  const startIndex = times.findIndex((t) => new Date(t) > now);
   const from = startIndex >= 0 ? startIndex : 0;
-  const to = Math.min(from + 12, times.length);
+  const to = Math.min(from + 11, times.length);
 
   for (let i = from; i < to; i += 1) {
     const hour = new Date(times[i]);
-    const label =
-      i === from
-      ? "Now"
-      : hour.toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false
-        });
+    const label = hour.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    });
     const info = getWeatherInfo(codes[i], isDay[i] === 1);
 
     const item = document.createElement("div");
